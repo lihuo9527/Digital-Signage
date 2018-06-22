@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>电子看板</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="swiper-3.4.2.min.css">
+    <script src="index.js"></script>
+    <script src='swiper-3.4.2.min.js'></script>
+</head>
+
+<body>
+    <header>
+        <h1 id="faceimg" class="faceimg">
+            <img src="images/faceimg.png" width="40%;" alt="">
+            <span id="AdminName" class="AdminName">组长：</span>
+        </h1>
+        <h1 id="Group" class="Group">
+            <span style="flex: 0 0 30%;padding-left: 1rem;">组名：<span id="GroupName" class="GroupName"></span></span>
+            <span id="date" class="date"></span>
+            <div id="listtitle" class="list-title">
+                <ul>
+                    <li class="Jo">生产单号</li>
+                    <li class="CustomerName">客户</li>
+                    <li class="Pattern">款号</li>
+                    <li class="Color">颜色</li>
+                    <li class="Size">规格</li>
+                    <li class="CompleteAmount">排单数</li>
+                    <li class="CompleteAmount">裁床数</li>
+                    <li class="CompleteAmount">完成数</li>
+                    <li class="FactoryDeliveryDate">车间交期</li>
+                    <li class="DeliveryDate">客户交期</li>
+                </ul>
+            </div>
+        </h1>
+    </header>
+    <span id="Filter">
+            <div class="menu-icon"></div>
+            <div class="menu-icon1"></div>
+            <div class="menu-icon"></div>
+    </span>
+    <div class="swiper-container">
+        <div class="swiper-wrapper" id="pages">
+            <div id="container" class="container swiper-slide"></div>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+    <div id="tabs">
+        <div id="tabs_container"></div>
+    </div>
+    <div id="shadow"></div>
+</body>
+
+</html>
