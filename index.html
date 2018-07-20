@@ -13,30 +13,38 @@
 </head>
 
 <body>
-    <header>
-        <h1 id="faceimg" class="faceimg">
-            <img src="images/faceimg.png" width="40%;" alt="">
-            <span id="AdminName" class="AdminName">组长：</span>
-        </h1>
-        <h1 id="Group" class="Group">
-            <span style="flex: 0 0 30%;padding-left: 1rem;">组名：<span id="GroupName" class="GroupName"></span></span>
-            <span id="date" class="date"></span>
-            <div id="listtitle" class="list-title">
-                <ul>
-                    <li class="Jo">生产单号</li>
-                    <li class="CustomerName">客户</li>
-                    <li class="Pattern">款号</li>
-                    <li class="Color">颜色</li>
-                    <li class="Size">规格</li>
-                    <li class="CompleteAmount">排单数</li>
-                    <li class="CompleteAmount">裁床数</li>
-                    <li class="CompleteAmount">完成数</li>
-                    <li class="FactoryDeliveryDate">车间交期</li>
-                    <li class="DeliveryDate">客户交期</li>
-                </ul>
+    <header id="header" style="margin-top: 2px;">
+        <div class="face">
+            <div style="width: 50%;display: flex;justify-content: center;align-items: center;height: 100%;box-sizing: border-box;">
+                <img src="images/faceimg.png" style="width:70px;height:92px;" alt="">
             </div>
-        </h1>
+            <div style="width: 50%;display: flex;justify-content: center;align-items: center;height: 100%;flex-flow: wrap;">
+                <div style="flex:0 0 100%;display:flex;justify-content: center;align-items: center;height: 70%;flex-flow: wrap;">
+                    <span id="AdminName" class="AdminName"></span>
+                    <span style="flex:0 0 100%;display: flex;justify-content:center;align-items: center;font-size: 25px;">(组长)</span>
+                </div>
+            </div>
+        </div>
+        <div id="Group" class="Group">
+            <span id="GroupName" class="GroupName"></span>
+            <span id="date" class="date"></span>
+        </div>
     </header>
+    <div id="listtitle" class="list-title">
+        <ul>
+            <li class="Line">生产线</li>
+            <li class="Jo">生产单号</li>
+            <li class="CustomerName">客户</li>
+            <li class="Pattern">款号</li>
+            <li class="Color">颜色</li>
+            <li class="Size">规格</li>
+            <li class="CompleteAmount">排单数</li>
+            <li class="CompleteAmount">裁床数</li>
+            <li class="CompleteAmount">完成数</li>
+            <li class="FactoryDeliveryDate">车间交期</li>
+            <li class="DeliveryDate">客户交期</li>
+        </ul>
+    </div>
     <span id="Filter">
             <div class="menu-icon"></div>
             <div class="menu-icon1"></div>

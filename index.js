@@ -11,14 +11,7 @@ window.onload = function() {
     var n1 = 0;
     var init = true;
     console.log(name);
-    var obj = new window_obj();
-    console.log(obj.language());
 
-    function window_obj() {
-        window_obj.prototype.language = function() {
-            return window.myjs ? window.myjs.getLanguage() : "cn";
-        }
-    }
     //时间日期
     Date.prototype.toLocaleString = function() {
         var show_day = new Array('星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期日');
@@ -218,23 +211,23 @@ window.onload = function() {
                 if (list.length > 0) {
                     var text = "";
                     for (var i = 0; i < list.length; i++) {
-                        document.getElementById("AdminName").innerHTML = "组长：" + list[i].Leader;
-                        var text = '<div class="box"><div class="listname"><span>' + list[i].LineName + '</span></div><table>'
+                        document.getElementById("AdminName").innerHTML = list[i].Leader;
+                        var text = '<div class="box"><div class="Line"><span>' + list[i].LineName + '</span></div><div class="table">'
                         for (var b = 0; b < list[i].PoList.length; b++) {
                             text +=
-                                '<tr><td class="Jo">' + list[i].PoList[b].PoCode + '</td>' +
-                                '<td class="CustomerName">' + list[i].PoList[b].CustomerName + '</td>' +
-                                '<td class="Pattern">' + list[i].PoList[b].Pattern + '</td>' +
-                                '<td class="Color">' + list[i].PoList[b].Color + '</td>' +
-                                '<td class="Size">' + list[i].PoList[b].Size + '</td>' +
-                                '<td class="CompleteAmount">' + list[i].PoList[b].PlanAmount + '</td>' +
-                                '<td class="CompleteAmount">' + list[i].PoList[b].CutAmount + '</td>' +
-                                '<td class="CompleteAmount" style="color:#fec107;">' + list[i].PoList[b].FinishAmount + '</td>' +
-                                '<td class="FactoryDeliveryDate">' + list[i].PoList[b].FactoryDeliveryDate + '</td>' +
-                                '<td class="DeliveryDate">' + list[i].PoList[b].DeliveryDate + '</td></tr>'
+                                '<ul><li class="Jo">' + list[i].PoList[b].PoCode + '</li>' +
+                                '<li class="CustomerName">' + list[i].PoList[b].CustomerName + '</li>' +
+                                '<li class="Pattern">' + list[i].PoList[b].Pattern + '</li>' +
+                                '<li class="Color">' + list[i].PoList[b].Color + '</li>' +
+                                '<li class="Size">' + list[i].PoList[b].Size + '</li>' +
+                                '<li class="CompleteAmount">' + list[i].PoList[b].PlanAmount + '</li>' +
+                                '<li class="CompleteAmount">' + list[i].PoList[b].CutAmount + '</li>' +
+                                '<li class="CompleteAmount">' + list[i].PoList[b].FinishAmount + '</li>' +
+                                '<li class="FactoryDeliveryDate">' + list[i].PoList[b].FactoryDeliveryDate + '</li>' +
+                                '<li class="DeliveryDate">' + list[i].PoList[b].DeliveryDate + '</li></ul >'
                         }
 
-                        text += '</table ></div>'
+                        text += '</div></div>'
                         container.innerHTML += text;
                     }
                     Push_Array(list);
@@ -251,6 +244,7 @@ window.onload = function() {
 
 
     function Push_Array(list) {
+        var GroupName = document.getElementById("GroupName").innerHTML;
         pages = [];
         for (var i = 0; i < list.length; i++) {
             var request = new XMLHttpRequest();
@@ -263,92 +257,67 @@ window.onload = function() {
                         var text = "";
                         for (var b = 0; b < pages.length; b++) {
                             var value = "";
-                            for (var a = 0; a < pages[b].PeriodList.length; a++) {
-                                value += '<tr>' +
-                                    '<td style="flex: 0 0 20%;border-left:none;font-size:1.5rem;">' + pages[b].PeriodList[a].Period + '</td>' +
-                                    '<td style="flex: 0 0 15%;border-left:none;font-size:1.5rem;">' + pages[b].PeriodList[a].TargetAmount + '</td>' +
-                                    '<td style="flex: 0 0 15%;border-left:none;font-size:1.5rem;">' + pages[b].PeriodList[a].FinishAmount + '</td>' +
-                                    '<td style="flex: 0 0 15%;border-left:none;font-size:1.5rem;">' + pages[b].PeriodList[a].EFF + '%</td>' +
-                                    '<td style="flex: 0 0 15%;border-left:none;font-size:1.5rem;">' + pages[b].PeriodList[a].ReworkAmount + '</td>' +
-                                    '<td style="flex: 0 0 15%;border-left:none;font-size:1.5rem;">' + pages[b].PeriodList[a].ReworkRate + '%</td>' +
-                                    '</tr>'
+                            if (pages[b].PeriodList) {
+                                for (var a = 0; a < pages[b].PeriodList.length; a++) {
+                                    value += '<ul>' +
+                                        '<li class="td_title" style="flex: 0 0 30%;">' + pages[b].PeriodList[a].Period + '</li>' +
+                                        '<li class="td_title" style="flex: 0 0 14%;">' + pages[b].PeriodList[a].TargetAmount + '</li>' +
+                                        '<li class="td_title" style="flex: 0 0 14%;">' + pages[b].PeriodList[a].FinishAmount + '</li>' +
+                                        '<li class="td_title" style="flex: 0 0 14%;">' + pages[b].PeriodList[a].EFF + '%</li>' +
+                                        '<li class="td_title" style="flex: 0 0 14%;">' + pages[b].PeriodList[a].ReworkAmount + '</li>' +
+                                        '<li class="td_title" style="flex: 0 0 14%;">' + pages[b].PeriodList[a].ReworkRate + '%</li>' +
+                                        '</ul>';
+                                }
+                                console.log("进入！")
+                                text +=
+                                    '<div class="page swiper-slide">' +
+
+                                    '<div class="header">' +
+                                    '<div class="line2" >' +
+                                    '<span class="title_css" >' + GroupName + "-" + list[b].LineName + '</span>' +
+                                    '</div>' +
+                                    '<div class="title_info">' +
+                                    '<span class="title_css" >' + '生产单：' + pages[b].CurrentPo.PoCode + '</span>' +
+                                    '<span class="title_css" >' + '订单数：' + pages[b].CurrentPo.Amount + '件' + '</span>' +
+                                    '<span class="title_css">' + '人数：' + pages[b].CurrentPo.WorkerAmount + '人' + '</span>' +
+                                    '<img  class="Img" src=' + pages[b].CurrentPo.ImgUrl + '>' +
+                                    '</div>' +
+                                    '</div>' +
+
+                                    '<div class="left_container">' +
+                                    '<div class="info">' +
+                                    '<p>节拍时间</p>' +
+                                    '<span>' + pages[b].CurrentPo.BeatTime + '秒</span>' +
+                                    '<p>目标生产能力</p>' +
+                                    '<span>' + pages[b].CurrentPo.TargetCapacity + '件</span>' +
+                                    '</div>' +
+                                    '<div class="info2">' +
+                                    '<p>今日目标数</p>' +
+                                    '<span>' + pages[b].DayTargetAmount + '件</span>' +
+                                    '<p>今日完成数</p>' +
+                                    '<span>' + pages[b].DayFinishAmount + '件</span>' +
+                                    '<p style="font-weight: 600;">效率' + pages[b].DayFinishRate + '%</p>' +
+                                    '</div>' +
+                                    '<div class="info2">' +
+                                    '<p>总目标数</p>' +
+                                    '<span>' + pages[b].TargetAmount + '件</span>' +
+                                    '<p>总完成数</p>' +
+                                    '<span>' + pages[b].FinishAmount + '件</span>' +
+                                    '<p style="font-weight: 600;">效率' + pages[b].FinishRate + '%</p>' +
+                                    '</div>' +
+                                    '</div>' +
+                                    '<div class="table_container">' +
+                                    '<ul>' +
+                                    '<li class="table_title" style="flex: 0 0 30%;">时间段</li>' +
+                                    '<li class="table_title">目标</li>' +
+                                    '<li class="table_title">完成</li>' +
+                                    '<li class="table_title">效率</li>' +
+                                    '<li class="table_title">返工数</li>' +
+                                    '<li class="table_title">返工率</li>' +
+                                    '</ul>' + value +
+                                    '</div>' +
+                                    '</div>';
                             }
-                            console.log("进入！")
-                            text +=
-                                '<div class="page swiper-slide">' +
-                                '<div class="header">' +
-                                '<div class="header_title" >' +
-                                '<h2 class="title_css" >生产线：' + list[b].LineName + ' 今日生产情况</h2>' +
-                                '<div class="info">' +
-                                '<span style="color:#fec107;">生产单号：' + pages[b].CurrentPo.PoCode + '</span>' +
-                                '<span >订单数：' + pages[b].CurrentPo.Amount + '件</span>' +
-                                '<span >人数：' + pages[b].CurrentPo.WorkerAmount + '人</span>' +
-                                '</div>' +
-                                '<div class="info">' +
-                                '<span >节拍时间：' + pages[b].CurrentPo.BeatTime + '秒</span>' +
-                                '<span >目标生产能力：' + pages[b].CurrentPo.TargetCapacity + '件/8小时</span>' +
-                                '</div>' +
-                                '</div>' +
-                                '<div class="header_img"><div style="width:50%;">' +
-                                '<img  class="Img" src=' + pages[b].CurrentPo.ImgUrl + '>' + '</div></div>' +
-                                '</div>' +
-                                '<div style="display:flex;width:100%;border-top:1px solid #2756ca;">' +
-                                '<div class="speedometer_container">' +
-                                '<div class="item">' +
-                                '<div class="speedometer">' +
-                                '<div style="width:50%;position:relative;display:flex;align-items:center;justify-content: center;"><img src="images/speedometer.png" style="width:100%;">' +
-                                '<span class="num0">0</span>' +
-                                '<span class="num20">20</span>' +
-                                '<span class="num40">40</span>' +
-                                '<span class="num60">60</span>' +
-                                '<span class="num80">80</span>' +
-                                '<span class="num100">100</span>' +
-                                '<img src="images/arrow.png" style="position:absolute;bottom:0;width:55%;transform-origin: center;transition: 1s; transform: rotate(' + 1.8 * pages[b].FinishRate + 'deg);">' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<h4 style="color:#fff;margin-top:0.5rem;margin-bottom:0;">效率' + pages[b].FinishRate + '%</h4>' +
-                                '<h3 class="item_amount">' +
-                                // '<span style="color:#fff;">效率' + pages[b].FinishRate + '%</span>' +
-                                '<span style="color:#32fdf9;">总完成数：' + pages[b].FinishAmount + '件</span>' +
-                                '<span style="color:#32fdf9;">总目标数：' + pages[b].TargetAmount + '件</span>' +
-                                '</h3>' +
-                                '<div class="item">' +
-                                '<div class="speedometer">' +
-                                '<div style="width:50%;position:relative;display:flex;align-items:center;justify-content: center;"><img src="images/speedometer.png" style="width:100%;">' +
-                                '<span class="num0">0</span>' +
-                                '<span class="num20">20</span>' +
-                                '<span class="num40">40</span>' +
-                                '<span class="num60">60</span>' +
-                                '<span class="num80">80</span>' +
-                                '<span class="num100">100</span>' +
-                                '<img src="images/arrow.png" style="position:absolute;bottom:0;width:55%;transform-origin: center;transition: 1s; transform: rotate(' + 1.8 * pages[b].DayFinishRate + 'deg);">' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>' +
-                                '<h4 style="color:#fff;margin-top:0.5rem;margin-bottom:0;">效率' + pages[b].DayFinishRate + '%</h4>' +
-                                '<h3 class="item_amount">' +
-                                // '<span style="color:#fff;">效率' + pages[b].DayFinishRate + '%</span>' +
-                                '<span style="color:#32fdf9;">日完成数：' + pages[b].DayFinishAmount + '件</span>' +
-                                '<span style="color:#32fdf9;">日目标数：' + pages[b].DayTargetAmount + '件</span>' +
-                                '</h3>' +
-                                '</div>' +
-                                '<div class="table_container">' +
-                                '<table>' +
-                                '<tbody>' +
-                                '<tr>' +
-                                '<th style="flex: 0 0 20%;">时间段</th>' +
-                                '<th>目标</th>' +
-                                '<th>完成</th>' +
-                                '<th>效率</th>' +
-                                '<th>返工数</th>' +
-                                '<th>返工率</th>' +
-                                '</tr>' + value +
-                                '</tbody>' +
-                                '</table>' +
-                                '</div>' +
-                                '</div>' +
-                                '</div>'
                         }
                         var objs = ReMovePage();
                         objs.innerHTML += text;
@@ -389,20 +358,12 @@ window.onload = function() {
             onSlideChangeEnd: function(swiper) {
                 console.log(swiper.activeIndex)
                 if (swiper.activeIndex == 0) {
-                    document.getElementById("faceimg").style.display = "flex";
+                    document.getElementById("header").style.display = "flex";
                     document.getElementById("listtitle").style.display = "flex";
-                    document.getElementById("Group").style.marginBottom = "0";
-                    document.getElementById("Group").style.color = "#48eefe";
-                    document.getElementById("date").style.color = "#48eefe";
-                    document.getElementsByTagName("header")[0].style.background = "none";
                     // console.log("主页！");
                 } else {
-                    document.getElementById("faceimg").style.display = "none";
+                    document.getElementById("header").style.display = "none";
                     document.getElementById("listtitle").style.display = "none";
-                    document.getElementById("Group").style.marginBottom = "1.2rem";
-                    document.getElementById("Group").style.color = "#fff";
-                    document.getElementById("date").style.color = "#fff";
-                    document.getElementsByTagName("header")[0].style.background = "#2756ca";
                 }
             }
         })
